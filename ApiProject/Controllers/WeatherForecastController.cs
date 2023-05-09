@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using ApiProject.NameServices;
 
 namespace ApiProject.Controllers;
 
@@ -12,10 +13,12 @@ public class WeatherForecastController : ControllerBase
     };
 
     private readonly ILogger<WeatherForecastController> _logger;
+    private NameService _nameService { get; set; }
 
-    public WeatherForecastController(ILogger<WeatherForecastController> logger)
+    public WeatherForecastController(NameService nameService,ILogger<WeatherForecastController> logger)
     {
         _logger = logger;
+        _nameService = nameService;
     }
 
     [HttpGet(Name = "GetWeatherForecast")]
@@ -28,5 +31,29 @@ public class WeatherForecastController : ControllerBase
                 Summary = Summaries[Random.Shared.Next(Summaries.Length)]
             })
             .ToArray();
+    
     }
+
+    [HttpPost(Name = "Post weatherForecast")]
+    public async Task<IActionResult> Post()
+    {
+        // Post Logic
+        return Ok("WeatherForecast posted");
+    }
+    [HttpPut(Name = "Put weatherForecast")]
+    public async Task<IActionResult> Put()
+    {
+        // Put Logic
+        return Ok("WeatherForecast put");
+    }
+    
+    
+    
+    [HttpDelete(Name = "Delete weatherForecast")]
+    public async Task<IActionResult> Delete(int Id)
+    {
+        // Delete Logic
+        return Ok("WeatherForecast deleted.");
+    }
+   
 }

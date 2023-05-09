@@ -1,6 +1,15 @@
+
+using ApiProject.NameServices;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+// Lifetimes:
+// Scoped -> creates a new instance for each HTTP Request
+// Transient --> Creates a new instance every time the service is requested
+// Singleton --> Creates only one instance for as long as the application is running
+builder.Services.AddScoped<NameService>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
